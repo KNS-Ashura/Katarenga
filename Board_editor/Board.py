@@ -1,4 +1,28 @@
 class Board:
+    
+    #in the following list:
+    #the number 1 = blue
+    #the number 2 = green
+    #the number 3 = yellow
+    #the number 4 = red 
+    
+    
+    #then the second number represent the player 
+    #0 if there is no player on the case
+    #1 for player 1
+    #2 for player 2
+    
+    #exemple:
+    # red case with a pawn of player 1 = 41
+    # red case with a pawn of player 2 = 42
+    # yellow case with a pawn of player 1 = 31
+    # red case with no player = 40
+    
+    
+    #finally
+    #the number 0 = a corner
+    
+    
     def __init__(self):
         self.__board_a = [[1, 2, 3, 4], [4, 3, 1, 1], [3, 4, 2, 2], [2, 1, 4, 3]]
         self.__board_b = [[3, 2, 1, 4], [4, 2, 1, 3], [1, 4, 3, 2], [2, 3, 4, 1]]
