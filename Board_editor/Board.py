@@ -20,15 +20,19 @@ class Board:
     
     
     #finally
-    #the number 0 = a corner
+    #the number 5 = a corner
+    
+    #exemple:
+    #a corner with no pawn = 50
+    #a corner with a pawn of player 1 = 51
     
     
     def __init__(self):
-        self.__board_a = [[1, 2, 3, 4], [4, 3, 1, 1], [3, 4, 2, 2], [2, 1, 4, 3]]
-        self.__board_b = [[3, 2, 1, 4], [4, 2, 1, 3], [1, 4, 3, 2], [2, 3, 4, 1]]
-        self.__board_c = [[3, 2, 4, 1], [2, 3, 2, 4], [1, 4, 1, 3], [4, 3, 1, 2]]
-        self.__board_d = [[1, 2, 3, 4], [4, 2, 1, 1], [2, 3, 4, 3], [3, 4, 1, 2]]
-        self.__board_corner = [0,0,0,0]
+        self.__board_a = [[10, 20, 30, 40], [40, 30, 10, 10], [30, 40, 20, 20], [20, 10, 40, 30]]
+        self.__board_b = [[30, 20, 10, 40], [40, 20, 10, 30], [10, 40, 30, 20], [20, 30, 40, 10]]
+        self.__board_c = [[30, 20, 40, 10], [20, 30, 20, 40], [10, 40, 10, 30], [40, 30, 10, 20]]
+        self.__board_d = [[10, 20, 30, 40], [40, 20, 10, 10], [20, 30, 40, 30], [30, 40, 10, 20]]
+        self.__board_corner = [50,50,50,50]
 
     def rotate_right(board):
         return [[board[3 - j][i] for j in range(4)] for i in range(4)]
