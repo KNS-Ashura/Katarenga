@@ -1,5 +1,7 @@
 import pygame
 import sys
+from Katarenga.Katarenga_ui import Katarenga_ui
+from Board_editor.Board import Board
 
 class Main_menu:
     def __init__(self, width=800, height=600, title="Katarenga"):
@@ -50,6 +52,9 @@ class Main_menu:
                 label = button["label"]
                 if label == "Katarenga":
                     print("Lauching Katarenga...")
+                    board_obj = Board()               # crée l'objet Board
+                    game = Katarenga_ui(board_obj)       # crée le jeu Katarenga
+                    game.run()                        # lance le jeu
                 elif label == "Congress":
                     print("Lauching Congress...")
                 elif label == "Isolation":

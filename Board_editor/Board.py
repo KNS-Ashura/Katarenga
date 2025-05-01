@@ -58,9 +58,3 @@ class Board:
     
     def get_board_corner(self):
         return self.__board_corner
-    
-
-obj = Board()
-
-print(obj.get_fused_board())
-print(obj.get_board_corner())
