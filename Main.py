@@ -15,14 +15,17 @@ class Main_menu:
         #ajout des boutons pour acceder au differents modes de jeux
         
         self.buttons = [
-            {"label": "Katarenga", "rect": pygame.Rect(300, 150, 200, 50), "color": (70, 130, 180)},
-            {"label": "Congress", "rect": pygame.Rect(300, 250, 200, 50), "color": (60, 179, 113)},
-            {"label": "Isolation", "rect": pygame.Rect(300, 350, 200, 50), "color": (220, 20, 60)}
+            {"label": "Katarenga", "rect": pygame.Rect(300, 50, 200, 50), "color": (70, 130, 180)},
+            {"label": "Congress", "rect": pygame.Rect(300, 150, 200, 50), "color": (60, 179, 113)},
+            {"label": "Isolation", "rect": pygame.Rect(300, 250, 200, 50), "color": (220, 20, 60)},
+            {"label": "Board Editor", "rect": pygame.Rect(300, 350, 200, 50), "color": (255, 140, 0)},
+            {"label": "Leave Game", "rect": pygame.Rect(300, 450, 200, 50), "color": (186, 85, 211)}
         ]
 
         self.font = pygame.font.SysFont(None, 36)
 
     def run(self):
+        #main loop of the interface
         while self.running:
             self.handle_events()
             self.update()
@@ -33,6 +36,7 @@ class Main_menu:
         sys.exit()
 
     def handle_events(self):
+        #fonction for the gestions of the inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -40,16 +44,20 @@ class Main_menu:
                 self.handle_click(event.pos)
                 
     def handle_click(self, position):
+        #gestion of the redirection for the different buttons
         for button in self.buttons:
             if button["rect"].collidepoint(position):
                 label = button["label"]
-                if label == "Menu":
-                    print("Redirection vers le menu...")
-                    # Tu peux lancer une autre classe ici
-                elif label == "Options":
-                    print("Redirection vers les options...")
-                elif label == "Quitter":
-                    print("Fermeture...")
+                if label == "Katarenga":
+                    print("Lauching Katarenga...")
+                elif label == "Congress":
+                    print("Lauching Congress...")
+                elif label == "Isolation":
+                    print("Lauching Isolation...")
+                elif label == "Board Editor":
+                    print("Lauching the Board Editor...")
+                elif label == "Leave Game":
+                    print("Leaving the Game...")
                     self.running = False
 
     def update(self):
