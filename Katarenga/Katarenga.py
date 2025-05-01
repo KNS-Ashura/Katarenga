@@ -1,22 +1,22 @@
-from Player import Joueur
-from Board import Board
+from Player import Player
+from Board_editor.Board import Board
 
-def victory_conditions(joueur: Joueur, board: Board):
-    # verifie le nbr de piece d'un joueur
-    if joueur.get_pieces_remaining_p1() <= 0:
-        print(f"{joueur.get_p_2_name()} gagne avec full capture")
+def victory_conditions(player: Player, board: Board):
+    # check the number of pieces for a player
+    if player.get_pieces_remaining_p1() <= 0:
+        print(f"{player.get_p_2_name()} gagne avec full capture")
         return True
-    if joueur.get_pieces_remaining_p2() <= 0:
-        print(f"{joueur.get_p_1_name()} gagne avec full capture")
+    if player.get_pieces_remaining_p2() <= 0:
+        print(f"{player.get_p_1_name()} gagne avec full capture")
         return True
 
-    # verifie si un pion est sur un corner
+    # check if a pawn is in a corner
     for val in board.get_board_corner():
         if val == 51:
-            print(f"{joueur.get_p_1_name()} pions dans un corner")
+            print(f"{player.get_p_1_name()} pions dans un corner")
             return True
         elif val == 52:
-            print(f"{joueur.get_p_2_name()} pions dans un corner")
+            print(f"{player.get_p_2_name()} pions dans un corner")
             return True
 
     return False

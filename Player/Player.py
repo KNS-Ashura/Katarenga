@@ -1,4 +1,4 @@
-class Joueur:
+class Player:
     def __init__(self, pieces_remaining_p1, pieces_remaining_p2):
         
         self.__player_1 = 1
