@@ -13,7 +13,7 @@ class Player:
         self.__pieces_remaining_p2 = pieces_remaining_p2
 
 
-#PLAYER 1
+    #PLAYER 1
 
     def get_pieces_remaining_p1(self):
         return self.__pieces_remaining_p1
@@ -33,14 +33,13 @@ class Player:
     def set_p_1_name(self,new_value):
         self.__player_1_name = new_value
 
-#PLAYER 2
-    def get_pieces_remaining_p2(self):
-        return self.__pieces_remaining_p2
+    #PLAYER 2
     
+    def get_pieces_remaining_p2(self):
+        return self.__pieces_remaining_p2   
 
     def set_pieces_remaining_p2(self):
         self.__pieces_remaining_p2 = 8
-
 
     def get_p_2(self):
         return self.__player_2
@@ -54,8 +53,8 @@ class Player:
     def delete_piece_p2(self):
         self.__pieces_remaining_p2 -= 1
 
-
-#Gestion player
+    #Gestion player
+    
     def Change_player(self):
         if self.__active_player == 1:
             self.__active_player = 2

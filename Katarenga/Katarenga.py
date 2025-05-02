@@ -22,3 +22,6 @@ def victory_conditions(player: Player, board: Board):
             return True
 
     return False
+
+def place_pawn():
+    pass
