@@ -15,12 +15,14 @@ class Katarenga_ui:
         self.running = True
         self.board = board_obj.get_fused_board()
         self.cell_size = 60
+        self.copied_value = None
 
     def run(self):
         while self.running:
             self.handle_events()
             self.update()
             self.draw()
+            self.draw_corner()
             pygame.display.flip()
             self.clock.tick(60)
         pygame.quit()
@@ -35,14 +37,20 @@ class Katarenga_ui:
 
     def handle_click(self, position):
         x, y = position
-        col = x // self.cell_size
-        row = y // self.cell_size
+        offset_x = (self.__width - self.cell_size * 8) // 2
+        offset_y = (self.__height - self.cell_size * 8) // 2
+
+        col = (x - offset_x) // self.cell_size
+        row = (y - offset_y) // self.cell_size
+
         if 0 <= row < 8 and 0 <= col < 8:
-            #operation to find where the player's mouse clicked
             value = self.board[row][col]
             color_code = value // 10
             player_code = value % 10
-            
+
+            self.copied_value = value
+            print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
+
             player_code = (player_code + 1) % 3
             self.board[row][col] = color_code * 10 + player_code
 
@@ -51,15 +59,38 @@ class Katarenga_ui:
 
     def draw(self):
         self.__screen.fill((30, 30, 30))
+        offset_x = (self.__width - self.cell_size * 8) // 2
+        offset_y = (self.__height - self.cell_size * 8) // 2
+
         for row in range(8):
             for col in range(8):
-                rect = pygame.Rect(col * self.cell_size, row * self.cell_size, self.cell_size, self.cell_size)
+                rect = pygame.Rect(
+                    offset_x + col * self.cell_size,
+                    offset_y + row * self.cell_size,
+                    self.cell_size,
+                    self.cell_size
+                )
                 color = self.get_color_from_code(self.board[row][col] // 10)
                 pygame.draw.rect(self.__screen, color, rect)
                 pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)
                 player_code = self.board[row][col] % 10
                 if player_code != 0:
                     self.draw_text(str(player_code), rect)
+                    
+    def draw_corner(self):
+        rect = pygame.Rect(
+            20,  # x = collé à gauche
+            20,  # y = collé en haut
+            60,  # largeur
+            60   # hauteur
+        )
+
+        pygame.draw.rect(self.__screen, (255, 165, 0), rect)  # orange
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  # contour blanc (optionnel)
+
+        
+        
+        
 
     def get_color_from_code(self, code):
         if code == 1:
