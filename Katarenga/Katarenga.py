@@ -1,5 +1,7 @@
-from Player import Player
+from Player.Player import Player
 from Board_editor.Board import Board
+
+obj = Player
 
 def victory_conditions(player: Player, board: Board):
     # check the number of pieces for a player
