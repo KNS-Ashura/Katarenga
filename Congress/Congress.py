@@ -2,6 +2,8 @@ from Player.Player import Player
 from Board_editor.Board import Board
 
 obj = Player
+
+
 def starting_pos_congress(board: Board):
 
     fused = board.get_fused_board()
@@ -29,13 +31,51 @@ def starting_pos_congress(board: Board):
     fused[7][1] +=   2
 
 
-#ca marche pas je check plus tard
-#check if pieces are orthogonal or not
+def check_isolated_pieces(board: Board, player_num):
 
-# def victory_conditions_congress(player: Player, board: Board, fused):
-#     for i in range(8):
-#         for j in range(8):
-#             if fused[i][0] == fused[j][0] or fused[i][1] == fused[j][1] or fused[1][i] == fused[1][j] or fused[0][i] == fused[0][j]:
-#                 return True #orthogonal
-#             else: 
-#                 return False #No orthogonal
+    fused = board.get_fused_board()
+    isolated_count = 0
+    positions = []
+    
+    for i in range(8):
+        for j in range(8):
+            # Check if there is a pawn in a case
+            if fused[i][j] % 10 == player_num:
+                isolated = True
+                
+                #Si isolé return False
+                # Check all directions
+                # check on top
+                if i > 0 and fused[i-1][j] % 10 == player_num:
+                    isolated = False
+                
+                # Check bottom
+                if i < 7 and fused[i+1][j] % 10 == player_num:
+                    isolated = False
+                
+                # Check left
+                if j > 0 and fused[i][j-1] % 10 == player_num:
+                    isolated = False
+                
+                # Check right
+                if j < 7 and fused[i][j+1] % 10 == player_num:
+                    isolated = False
+                
+                if isolated:
+                    isolated_count += 1
+                    positions.append((i, j))
+    
+    return isolated_count, positions
+
+
+def victory_conditions_congress(board: Board):
+   
+    isolated_p1, positions_p1 = check_isolated_pieces(board, 1)
+    isolated_p2, positions_p2 = check_isolated_pieces(board, 2)
+    
+    if isolated_p1 == 0:
+        return 1, "Joueur 1 a gagné - Tous ses pions sont connectés!"
+    elif isolated_p2 == 0:
+        return 2, "Joueur 2 a gagné - Tous ses pions sont connectés!"
+    else:
+        return None, f"La partie continue. Pions isolés: Joueur 1: {isolated_p1}, Joueur 2: {isolated_p2}"
