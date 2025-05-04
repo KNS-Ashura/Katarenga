@@ -2,6 +2,10 @@ import pygame
 import sys
 from Katarenga.Katarenga_ui import Katarenga_ui
 from Board_editor.Board import Board
+from Congress.Congress_ui import Congress_ui
+from Isolation.Isolation_ui import Isolation_ui
+from Board_editor.Board_editor_ui import Board_editor_ui
+
 
 class Main_menu:
     def __init__(self, width=800, height=600, title="Katarenga"):
@@ -46,24 +50,33 @@ class Main_menu:
                 self.handle_click(event.pos)
                 
     def handle_click(self, position):
-        #gestion of the redirection for the different buttons
-        for button in self.buttons:
-            if button["rect"].collidepoint(position):
-                label = button["label"]
-                if label == "Katarenga":
-                    print("Lauching Katarenga...")
-                    board_obj = Board()               # crée l'objet Board
-                    game = Katarenga_ui(board_obj)       # crée le jeu Katarenga
-                    game.run()                        # lance le jeu
-                elif label == "Congress":
-                    print("Lauching Congress...")
-                elif label == "Isolation":
-                    print("Lauching Isolation...")
-                elif label == "Board Editor":
-                    print("Lauching the Board Editor...")
-                elif label == "Leave Game":
-                    print("Leaving the Game...")
-                    self.running = False
+            #gestion of the redirection for the different buttons
+            for button in self.buttons:
+                if button["rect"].collidepoint(position):
+                    label = button["label"]
+                    if label == "Katarenga":
+                        print("Lauching Katarenga...")
+                        board_obj = Board()               # crée l'objet Board
+                        game = Katarenga_ui(board_obj)       # crée le jeu Katarenga
+                        game.run()                        # lance le jeu
+                    elif label == "Congress":
+                        print("Lauching Congress...")
+                        board_obj = Board()
+                        game = Congress_ui(board_obj)
+                        game.run()
+                    elif label == "Isolation":
+                        print("Lauching Isolation...")
+                        board_obj = Board()
+                        game = Isolation_ui(board_obj)
+                        game.run()
+                    elif label == "Board Editor":
+                        print("Lauching the Board Editor...")
+                        board_obj = Board()
+                        game = Board_editor_ui(board_obj)
+                        game.run()
+                    elif label == "Leave Game":
+                        print("Leaving the Game...")
+                        self.running = False
 
     def update(self):
         pass
