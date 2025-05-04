@@ -2,9 +2,10 @@ import pygame
 import sys
 
 from Board_editor import Board
+from Board_editor import Board_ui 
 
 class Katarenga_ui:
-    def __init__(self, board_obj, width=640, height=640, title="Katarenga Board"):
+    def __init__(self, board_obj, board_ui_obj,width=640, height=640, title="Katarenga Board"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -14,6 +15,7 @@ class Katarenga_ui:
         self.clock = pygame.time.Clock()
         self.running = True
         self.board = board_obj.get_fused_board()
+        self.board_ui = board_ui_obj
         self.cell_size = 60
         self.copied_value = None
 
@@ -70,7 +72,7 @@ class Katarenga_ui:
                     self.cell_size,
                     self.cell_size
                 )
-                color = self.get_color_from_code(self.board[row][col] // 10)
+                color = self.board_ui.get_color_from_board(self.board[row][col] // 10)
                 pygame.draw.rect(self.__screen, color, rect)
                 pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)
                 player_code = self.board[row][col] % 10
@@ -88,24 +90,6 @@ class Katarenga_ui:
         pygame.draw.rect(self.__screen, (255, 165, 0), rect)  # orange
         pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  # contour blanc (optionnel)
 
-        
-        
-        
-
-    def get_color_from_code(self, code):
-        if code == 1:
-            return (0, 0, 255)  
-        elif code == 2:
-            return (0, 255, 0)  
-        elif code == 3:
-            return (255, 255, 0)
-        elif code == 4:
-            return (255, 0, 0)  
-        elif code == 5:
-            return (128, 0, 128)
-        else:
-            return (50, 50, 50) 
-
     def draw_text(self, text, rect):
         font = pygame.font.SysFont(None, 24)
         txt_surface = font.render(text, True, (255, 255, 255))
@@ -115,5 +99,6 @@ class Katarenga_ui:
 
 if __name__ == "__main__":
     board_obj = Board()
-    app = Katarenga_ui(board_obj)
+    board_ui_obj = Board_ui()
+    app = Katarenga_ui(board_obj,board_ui_obj)
     app.run()

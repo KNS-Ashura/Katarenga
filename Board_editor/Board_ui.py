@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-class MainMenu:
+class Board_ui:
     def __init__(self, width=800, height=600, title="Katarenga"):
         pygame.init()
         self.__width = width
@@ -33,6 +33,20 @@ class MainMenu:
     def draw(self):
         self.__screen.fill((30, 30, 30))
 
+    def get_color_from_board(self, code):
+        if code == 1:
+            return (0, 0, 255)  
+        elif code == 2:
+            return (0, 255, 0)  
+        elif code == 3:
+            return (255, 255, 0)
+        elif code == 4:
+            return (255, 0, 0)  
+        elif code == 5:
+            return (128, 0, 128)
+        else:
+            return (50, 50, 50) 
+
 if __name__ == "__main__":
-    app = MainMenu()
+    app = Board_ui()
     app.run()
