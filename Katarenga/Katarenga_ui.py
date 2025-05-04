@@ -46,15 +46,20 @@ class Katarenga_ui:
         row = (y - offset_y) // self.cell_size
 
         if 0 <= row < 8 and 0 <= col < 8:
-            value = self.board[row][col]
-            color_code = value // 10
-            player_code = value % 10
+            if self.copied_value == None:
+                value = self.board[row][col] 
+                color_code = value // 10
+                player_code = value % 10
 
-            self.copied_value = value
-            print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
+                self.copied_value = value
+                print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
 
-            player_code = (player_code + 1) % 3
-            self.board[row][col] = color_code * 10 + player_code
+                player_code = (player_code + 1) % 3
+                self.board[row][col] = color_code * 10 + player_code
+
+            else:
+                self.board[row][col] = self.copied_value
+                
 
     def update(self):
         pass
