@@ -24,7 +24,19 @@ class Katarenga_ui:
             self.handle_events()
             self.update()
             self.draw()
-            self.draw_corner()
+
+            #DRAW CORNER
+
+            self.draw_corner_top_left()
+            self.draw_corner_top_right()
+            self.draw_corner_bot_left()
+            self.draw_corner_bot_right()
+            #DRAW RECTANGLE
+
+            self.draw_rectangle_left()
+            self.draw_rectangle_right()
+            self.draw_rectangle_top()
+            self.draw_rectangle_bot()
             pygame.display.flip()
             self.clock.tick(60)
         pygame.quit()
@@ -46,20 +58,15 @@ class Katarenga_ui:
         row = (y - offset_y) // self.cell_size
 
         if 0 <= row < 8 and 0 <= col < 8:
-            if self.copied_value == None:
-                value = self.board[row][col] 
-                color_code = value // 10
-                player_code = value % 10
+            value = self.board[row][col]
+            color_code = value // 10
+            player_code = value % 10
 
-                self.copied_value = value
-                print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
+            self.copied_value = value
+            print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
 
-                player_code = (player_code + 1) % 3
-                self.board[row][col] = color_code * 10 + player_code
-
-            else:
-                self.board[row][col] = self.copied_value
-                
+            player_code = (player_code + 1) % 3
+            self.board[row][col] = color_code * 10 + player_code
 
     def update(self):
         pass
@@ -84,16 +91,98 @@ class Katarenga_ui:
                 if player_code != 0:
                     self.draw_text(str(player_code), rect)
                     
-    def draw_corner(self):
+    def draw_corner_top_left(self):
         rect = pygame.Rect(
             20,  # x = collé à gauche
             20,  # y = collé en haut
             60,  # largeur
             60   # hauteur
         )
+        pygame.draw.rect(self.__screen, (255, 165, 0), rect) 
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  
 
-        pygame.draw.rect(self.__screen, (255, 165, 0), rect)  # orange
-        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  # contour blanc (optionnel)
+    def draw_corner_top_right(self):
+        rect = pygame.Rect(
+            560,  
+            20,  
+            60,  
+            60   
+        )
+        pygame.draw.rect(self.__screen, (255, 165, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  
+
+    def draw_corner_bot_left(self):
+        rect = pygame.Rect(
+            20,  
+            560, 
+            60,  
+            60   
+        )
+        pygame.draw.rect(self.__screen, (255, 165, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  
+
+    def draw_corner_bot_right(self):
+        rect = pygame.Rect(
+            560,  
+            560,  
+            60,  
+            60   
+        )
+
+        pygame.draw.rect(self.__screen, (255, 165, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  
+
+        
+    #DRAW RECTANGLE DESIGN KATARENGA
+
+    def draw_rectangle_left(self):
+        rect = pygame.Rect(
+            20, # x = collé à gauche
+            80, # y = collé en haut
+            60, # largeur
+            480 # hauteur
+        )
+
+        pygame.draw.rect(self.__screen, (100, 65, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  
+
+    def draw_rectangle_right(self):
+        rect = pygame.Rect(
+            560,  
+            80,  
+            60,  
+            480 
+        )
+
+        pygame.draw.rect(self.__screen, (100, 65, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1) 
+
+    def draw_rectangle_top(self):
+        rect = pygame.Rect(
+            80, 
+            20, 
+            480, 
+            60 
+        )
+
+        pygame.draw.rect(self.__screen, (100, 65, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1) 
+
+    def draw_rectangle_bot(self):
+        rect = pygame.Rect(
+            80, 
+            560,  
+            480,  
+            60 
+        )
+
+        pygame.draw.rect(self.__screen, (100, 65, 0), rect)  
+        pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)  
+
+
+
+
+
 
     def draw_text(self, text, rect):
         font = pygame.font.SysFont(None, 24)
