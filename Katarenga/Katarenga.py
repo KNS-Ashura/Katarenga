@@ -21,5 +21,22 @@ def victory_conditions(player: Player, board: Board):
 
     return False
 
-def place_pawn():
-    pass
+
+def place_pawn(player: Player, board: Board):
+    fused = Board.get_fused_board()
+
+    # Pawns from player 2 (TOP)
+    for col in range(8):
+        if col % 2 == 0:
+            player.fused[0][col] = (player.fused[0][col] // 10) * 10 + 2
+        else:
+            player.fused[1][col] = (player.fused[1][col] // 10) * 10 + 2
+
+    # Pawns from player 1 (BOTTOM)
+    for col in range(8):
+        if col % 2 == 1:
+            player.fused[6][col] = (player.fused[6][col] // 10) * 10 + 1
+        else:
+            player.fused[7][col] = (player.fused[7][col] // 10) * 10 + 1
+
+    return fused

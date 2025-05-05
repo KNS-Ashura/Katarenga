@@ -31,6 +31,7 @@ class Katarenga_ui:
             self.draw_corner_top_right()
             self.draw_corner_bot_left()
             self.draw_corner_bot_right()
+            
             #DRAW RECTANGLE
 
             self.draw_rectangle_left()
