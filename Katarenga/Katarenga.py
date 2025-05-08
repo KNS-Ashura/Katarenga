@@ -1,9 +1,9 @@
-from Player.Player import Player
-from Board_editor.Board import Board
-
 class Katarenga:
 
-    def victory_conditions(player: Player, board: Board):
+    def __init__(self,player):
+        self.player = player
+
+    def victory_conditions(player, board):
         # check the number of pieces for a player
         if player.get_pieces_remaining_p1() <= 0:
             print(f"{player.get_p_2_name()} gagne avec full capture")
@@ -24,22 +24,8 @@ class Katarenga:
         return False
 
 
-    def place_pawn(player: Player, board):
-        fused = board
-
-        # Pawns from player 2 (TOP)
-        for col in range(8):
-            if col % 2 == 0:
-                player.fused[0][col] = (player.fused[0][col] // 10) * 10 + 2
-            else:
-                player.fused[1][col] = (player.fused[1][col] // 10) * 10 + 2
-
-        # Pawns from player 1 (BOTTOM)
-        for col in range(8):
-            if col % 2 == 1:
-                player.fused[6][col] = (player.fused[6][col] // 10) * 10 + 1
-            else:
-                player.fused[7][col] = (player.fused[7][col] // 10) * 10 + 1
-
-        return fused
+    def place_pawn(board):
+        for i in range(8):
+            board[0][i] + 2
+            board[7][i] + 1
 

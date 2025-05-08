@@ -1,13 +1,13 @@
 import pygame
 import sys
 
-from Katarenga.Katarenga import Katarenga
+from Katarenga import Katarenga
 from Board_editor import Board
 from Board_editor import Board_ui 
 from Player.Player import Player
 
 class Katarenga_ui:
-    def __init__(self, board_obj, board_ui_obj, width=640, height=640, title="Katarenga Board"):
+    def __init__(self, board_obj, board_ui_obj,katarenga, width=640, height=640, title="Katarenga Board"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -20,6 +20,7 @@ class Katarenga_ui:
         self.board_ui = board_ui_obj
         self.cell_size = 60
         self.copied_value = None
+        self.katarenga = katarenga
 
     def run(self):
         while self.running:
@@ -61,7 +62,7 @@ class Katarenga_ui:
             self.update()
             
     def gameloop(self):
-        Katarenga.place_pawn(Player(0,0), self.board)
+        self.katarenga.place_pawn(self,self.board)
 
     def update(self):
         self.draw()
@@ -97,6 +98,7 @@ class Katarenga_ui:
 if __name__ == "__main__":
     board_obj = Board()
     board_ui_obj = Board_ui()
-    app = Katarenga_ui(board_obj,board_ui_obj)
+    katarenga = Katarenga()
+    app = Katarenga_ui(board_obj,board_ui_obj,katarenga)
     player = Player()
     app.run()
