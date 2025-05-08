@@ -2,36 +2,110 @@ import pygame
 import sys
 
 class Board_ui:
-    def __init__(self, width=800, height=600, title="Katarenga"):
-        pygame.init()
-        self.__width = width
-        self.__height = height
-        self.__title = title
-        self.__screen = pygame.display.set_mode((self.__width, self.__height))
-        pygame.display.set_caption(self.__title)
-        self.clock = pygame.time.Clock()
-        self.running = True
+        
+    def draw_all_corners(self,size):
+        
+            #DRAW CORNER
 
-    def run(self):
-        while self.running:
-            self.handle_events()
-            self.update()
-            self.draw()
-            pygame.display.flip()
-            self.clock.tick(60)
-        pygame.quit()
-        sys.exit()
+            self.draw_corner_top_left(size)
+            self.draw_corner_top_right(size)
+            self.draw_corner_bot_left(size)
+            self.draw_corner_bot_right(size)
+            
+            #DRAW RECTANGLE
 
-    def handle_events(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
+            self.draw_rectangle_left(size)
+            self.draw_rectangle_right(size)
+            self.draw_rectangle_top(size)
+            self.draw_rectangle_bot(size)
+    
+    def draw_corner_top_left(self,size):
+        rect = pygame.Rect(
+            20,  # x = collé à gauche
+            20,  # y = collé en haut
+            60,  # largeur
+            60   # hauteur
+        )
+        pygame.draw.rect(size, (255, 165, 0), rect) 
+        pygame.draw.rect(size, (255, 255, 255), rect, 1)  
 
-    def update(self):
-        pass
+    def draw_corner_top_right(self,size):
+        rect = pygame.Rect(
+            560,  
+            20,  
+            60,  
+            60   
+        )
+        pygame.draw.rect(size, (255, 165, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1)  
 
-    def draw(self):
-        self.__screen.fill((30, 30, 30))
+    def draw_corner_bot_left(self,size):
+        rect = pygame.Rect(
+            20,  
+            560, 
+            60,  
+            60   
+        )
+        pygame.draw.rect(size, (255, 165, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1)  
+
+    def draw_corner_bot_right(self,size):
+        rect = pygame.Rect(
+            560,  
+            560,  
+            60,  
+            60   
+        )
+
+        pygame.draw.rect(size, (255, 165, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1)  
+
+        
+    #DRAW RECTANGLE DESIGN KATARENGA
+
+    def draw_rectangle_left(self,size):
+        rect = pygame.Rect(
+            20, # x = collé à gauche
+            80, # y = collé en haut
+            60, # largeur
+            480 # hauteur
+        )
+
+        pygame.draw.rect(size, (100, 65, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1)  
+
+    def draw_rectangle_right(self,size):
+        rect = pygame.Rect(
+            560,  
+            80,  
+            60,  
+            480 
+        )
+
+        pygame.draw.rect(size, (100, 65, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1) 
+
+    def draw_rectangle_top(self,size):
+        rect = pygame.Rect(
+            80, 
+            20, 
+            480, 
+            60 
+        )
+
+        pygame.draw.rect(size, (100, 65, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1) 
+
+    def draw_rectangle_bot(self,size):
+        rect = pygame.Rect(
+            80, 
+            560,  
+            480,  
+            60 
+        )
+
+        pygame.draw.rect(size, (100, 65, 0), rect)  
+        pygame.draw.rect(size, (255, 255, 255), rect, 1)  
 
     def get_color_from_board(self, code):
         if code == 1:
@@ -46,6 +120,11 @@ class Board_ui:
             return (128, 0, 128)
         else:
             return (50, 50, 50) 
+        
+    def get_circle_from_board(self,case):
+        if case == 1 or case == 2:
+            return True
+        
 
 if __name__ == "__main__":
     app = Board_ui()

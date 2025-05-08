@@ -1,5 +1,6 @@
 import pygame
 import sys
+from Katarenga import Katarenga
 from Katarenga.Katarenga_ui import Katarenga_ui
 from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui

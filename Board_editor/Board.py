@@ -43,7 +43,7 @@ class Board:
     def rotate_side(board):
         return [[board[3 - i][3 - j] for j in range(4)] for i in range(4)]
 
-    def board_fusion(board1, board2, board3, board4):
+    def board_fusion(self, board1, board2, board3, board4):
         fused = [[0 for _ in range(8)] for _ in range(8)]
         for i in range(4):
             for j in range(4):
@@ -54,7 +54,7 @@ class Board:
         return fused
 
     def get_fused_board(self):
-        return Board.board_fusion(self.__board_a, self.__board_b, self.__board_c, self.__board_d)
+        return self.board_fusion(self.__board_a, self.__board_b, self.__board_c, self.__board_d)
     
     def get_board_corner(self):
         return self.__board_corner
