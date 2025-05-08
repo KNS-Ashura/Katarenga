@@ -24,8 +24,8 @@ class Katarenga:
         return False
 
 
-    def place_pawn(board):
+    def place_pawn(self,board):
         for i in range(8):
-            board[0][i] + 2
-            board[7][i] + 1
+            board[0][i] += 2
+            board[7][i] += 1
 

@@ -33,6 +33,7 @@ class Board:
         self.__board_c = [[30, 20, 40, 10], [20, 30, 20, 40], [10, 40, 10, 30], [40, 30, 10, 20]]
         self.__board_d = [[10, 20, 30, 40], [40, 20, 10, 10], [20, 30, 40, 30], [30, 40, 10, 20]]
         self.__board_corner = [50,50,50,50]
+        self.__selected_board = self.board_fusion(self.__board_a, self.__board_b, self.__board_c, self.__board_d)
 
     def rotate_right(board):
         return [[board[3 - j][i] for j in range(4)] for i in range(4)]
@@ -58,3 +59,11 @@ class Board:
     
     def get_board_corner(self):
         return self.__board_corner
+    
+    def get_selected_board(self):
+        return self.__selected_board
+    
+    def set_selected_board(self):
+        pass
+        #self.__selected_board = 
+

@@ -23,6 +23,7 @@ class Katarenga_ui:
         self.katarenga = katarenga
 
     def run(self):
+        self.katarenga.place_pawn(self.board)
         while self.running:
             self.handle_events()
             self.update()
@@ -62,10 +63,10 @@ class Katarenga_ui:
             self.update()
             
     def gameloop(self):
-        self.katarenga.place_pawn(self,self.board)
+        pass
 
     def update(self):
-        self.draw()
+        pass
 
     def draw(self):
         self.__screen.fill((30, 30, 30))

@@ -58,27 +58,24 @@ class Main_menu:
             for button in self.buttons:
                 if button["rect"].collidepoint(position):
                     label = button["label"]
+                    board_obj = Board()
                     if label == "Katarenga":
                         print("Lauching Katarenga...")
-                        player = Player(8,8)
-                        board_obj = Board()  
+                        player = Player(8,8)  
                         board_ui_obj = Board_ui()
                         katarenga = Katarenga(player)            # crée l'objet Board
                         game = Katarenga_ui(board_obj,board_ui_obj,katarenga)       # crée le jeu Katarenga
                         game.run()                        # lance le jeu
                     elif label == "Congress":
                         print("Lauching Congress...")
-                        board_obj = Board()
                         game = Congress_ui(board_obj)
                         game.run()
                     elif label == "Isolation":
                         print("Lauching Isolation...")
-                        board_obj = Board()
                         game = Isolation_ui(board_obj)
                         game.run()
                     elif label == "Board Editor":
                         print("Lauching the Board Editor...")
-                        board_obj = Board()
                         game = Board_editor_ui(board_obj)
                         game.run()
                     elif label == "Leave Game":
