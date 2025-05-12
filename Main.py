@@ -68,15 +68,15 @@ class Main_menu:
                         game.run()                        # lance le jeu
                     elif label == "Congress":
                         print("Lauching Congress...")
-                        game = Congress_ui(board_obj)
+                        game = Congress_ui()
                         game.run()
                     elif label == "Isolation":
                         print("Lauching Isolation...")
-                        game = Isolation_ui(board_obj)
+                        game = Isolation_ui()
                         game.run()
                     elif label == "Board Editor":
                         print("Lauching the Board Editor...")
-                        game = Board_editor_ui(board_obj)
+                        game = Board_editor_ui()
                         game.run()
                     elif label == "Leave Game":
                         print("Leaving the Game...")
