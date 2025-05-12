@@ -61,13 +61,13 @@ class Board_editor_ui:
                         print("Lauching editor...")
 
                     elif label == "Square C":
-                        square_b_ui = Square_c_ui()
-                        square_b_ui.run()
+                        square_c_ui = Square_c_ui()
+                        square_c_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Square D":
-                        square_b_ui = Square_d_ui()
-                        square_b_ui.run()
+                        square_d_ui = Square_d_ui()
+                        square_d_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Moves Squares":
