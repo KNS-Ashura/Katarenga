@@ -1,5 +1,4 @@
 import pygame
-import sys
 
 from Board_editor.Board import Board
 
@@ -15,12 +14,12 @@ class Board_editor_ui:
         self.running = True
         
         self.buttons = [
-            {"label": "Square A", "rect": pygame.Rect(300, 50, 200, 50), "color": (70, 130, 180)},
-            {"label": "Square B", "rect": pygame.Rect(300, 150, 200, 50), "color": (60, 179, 113)},
-            {"label": "Square C", "rect": pygame.Rect(300, 250, 200, 50), "color": (220, 20, 60)},
-            {"label": "Square D", "rect": pygame.Rect(300, 350, 200, 50), "color": (255, 140, 0)},
-            {"label": "Moves Squares", "rect": pygame.Rect(300, 450, 200, 50), "color": (186, 85, 211)},
-            {"label": "Go to menu", "rect": pygame.Rect(300, 450, 200, 50), "color": (234,182,118)}
+            {"label": "Square A", "rect": pygame.Rect(225, 100, 150, 50), "color": (70, 130, 180)},
+            {"label": "Square B", "rect": pygame.Rect(425, 100, 150, 50), "color": (60, 179, 113)},
+            {"label": "Square C", "rect": pygame.Rect(225, 200, 150, 50), "color": (220, 20, 60)},
+            {"label": "Square D", "rect": pygame.Rect(425, 200, 150, 50), "color": (255, 140, 0)},
+            {"label": "Moves Squares", "rect": pygame.Rect(300, 300, 200, 50), "color": (186, 85, 211)},
+            {"label": "Go to menu", "rect": pygame.Rect(300, 400, 200, 50), "color": (234, 182, 118)}
         ]
         
         self.font = pygame.font.SysFont(None, 36)
@@ -32,13 +31,13 @@ class Board_editor_ui:
             self.draw()
             pygame.display.flip()
             self.clock.tick(60)
-        pygame.quit()
-        sys.exit()
 
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                self.handle_click(event.pos)
                 
     def handle_click(self, position):
             #gestion of the redirection for the different buttons
@@ -46,16 +45,26 @@ class Board_editor_ui:
                 if button["rect"].collidepoint(position):
                     label = button["label"]
                     board_obj = Board()
-                    if label == "Katarenga":
-                        print("Lauching Katarenga...")
-                    elif label == "Congress":
-                        print("Lauching Congress...")
-                    elif label == "Isolation":
-                        print("Lauching Isolation...")
-                    elif label == "Board Editor":
-                        print("Lauching the Board Editor...")
-                    elif label == "Leave Game":
-                        print("Leaving the Game...")
+                    if label == "Square A":
+                        print("Lauching editor...")
+
+                    elif label == "Square A":
+                        print("Lauching editor...")
+
+                    elif label == "Square B":
+                        print("Lauching editor...")
+
+                    elif label == "Square C":
+                        print("Lauching editor...")
+
+                    elif label == "Square D":
+                        print("Lauching editor...")
+
+                    elif label == "Moves Squares":
+                        print("Lauching editor...")
+
+                    elif label == "Go to menu":
+                        print("Lauching menu...")
                         self.running = False
 
     def update(self):
@@ -73,5 +82,6 @@ class Board_editor_ui:
         self.__screen.blit(txt_surface, txt_rect)
 
 if __name__ == "__main__":
-    app = Board_editor_ui()
-    app.run()
+    while True:
+        app = Board_editor_ui()
+        app.run()
