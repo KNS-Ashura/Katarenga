@@ -121,10 +121,6 @@ class Board_ui:
         else:
             return (50, 50, 50) 
         
-    def get_circle_from_board(self,case):
-        if case == 1 or case == 2:
-            return True
-        
 
 if __name__ == "__main__":
     app = Board_ui()

@@ -85,9 +85,12 @@ class Katarenga_ui:
                 pygame.draw.rect(self.__screen, color, rect)
                 pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)
                 player_code = self.board[row][col] % 10
-                if player_code != 0:
+                if player_code == 1:
                     self.draw_text(str(player_code), rect)
                     pygame.draw.circle(self.__screen, (255, 255, 255), rect.center, self.cell_size // 2 - 5)
+                if player_code == 2:
+                    self.draw_text(str(player_code), rect)
+                    pygame.draw.circle(self.__screen, (0, 0, 0), rect.center, self.cell_size // 2 - 5)
                     
     def draw_text(self, text, rect):
         font = pygame.font.SysFont(None, 24)
