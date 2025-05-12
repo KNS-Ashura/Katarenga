@@ -21,6 +21,8 @@ class Main_menu:
         pygame.display.set_caption(self.__title)
         self.clock = pygame.time.Clock()
         self.running = True
+
+
         
         #ajout des boutons pour acceder au differents modes de jeux
         
@@ -35,7 +37,7 @@ class Main_menu:
         self.font = pygame.font.SysFont(None, 36)
 
     def run(self):
-        #main loop of the interface
+       
         while self.running:
             self.handle_events()
             self.update()
