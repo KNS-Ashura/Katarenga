@@ -20,15 +20,9 @@ class Square_a_ui:
         self.board_ui = Board_ui()
         
         
-        self.board = self.board_obj._Board__board_a
-        
+        self.board = self.board_obj.get_selected_board(1)
         
         self.cell_size = 100
-        self.colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)]
-
-        self.color_count = [0] * len(self.colors)
-        self.color_limit = 4
-        self.color_limit = False
 
     def run(self):
         while self.running:
@@ -60,11 +54,12 @@ class Square_a_ui:
             
             print(f"Clicked cell ({row}, {col}): Value {value}, Color {color_code}")
             
-            # Cycle through the colors when the cell is clicked
+            # Cycle through the colors (10, 20, 30, 40) when the cell is clicked
             current_color_code = self.board[row][col] // 10
-            new_color_code = (current_color_code + 1) % len(self.colors)
+            new_color_code = (current_color_code % 4) + 1  # Cycle between 1 and 4
             self.board[row][col] = new_color_code * 10 + (self.board[row][col] % 10)
             
+            print(f"Updated board: {self.board}")
     
     def draw(self):
         self.__screen.fill((30, 30, 30))

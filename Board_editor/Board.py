@@ -60,10 +60,15 @@ class Board:
     def get_board_corner(self):
         return self.__board_corner
     
-    def get_selected_board(self):
+    def get_selected_board(self,selected_board):
+        if selected_board == 1:
+            self.__selected_board = self.__board_a
+        elif selected_board == 2:
+            self.__selected_board = self.__board_b
+        elif selected_board == 3:
+            self.__selected_board = self.__board_c
+        elif selected_board == 4:
+            self.__selected_board = self.__board_d
+        else:
+            raise ValueError("Invalid board selection")
         return self.__selected_board
-    
-    def set_selected_board(self):
-        pass
-        #self.__selected_board = 
-

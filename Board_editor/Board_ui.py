@@ -121,6 +121,15 @@ class Board_ui:
         else:
             return (50, 50, 50) 
         
+    def get_colors(self):
+        return {
+            1: (0, 0, 255),  
+            2: (0, 255, 0),  
+            3: (255, 255, 0),
+            4: (255, 0, 0),  
+            5: (128, 0, 128)
+        }
+        
 
 if __name__ == "__main__":
     app = Board_ui()
