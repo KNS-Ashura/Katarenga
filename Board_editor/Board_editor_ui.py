@@ -1,6 +1,7 @@
 import pygame
-
 from Board_editor.Board import Board
+from Board_editor.Board import Board
+from Board_editor.Square_editor.Square_a_ui import *
 
 class Board_editor_ui:
     def __init__(self, width=800, height=600, title="Katarenga"):
@@ -46,6 +47,8 @@ class Board_editor_ui:
                     label = button["label"]
                     board_obj = Board()
                     if label == "Square A":
+                        square_a_ui = Square_a_ui()
+                        square_a_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Square A":
