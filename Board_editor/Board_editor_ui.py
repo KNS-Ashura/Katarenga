@@ -1,7 +1,11 @@
 import pygame
 from Board_editor.Board import Board
-from Board_editor.Board import Board
+
+#Import all square interfaces
 from Board_editor.Square_editor.Square_a_ui import *
+from Board_editor.Square_editor.Square_b_ui import *
+from Board_editor.Square_editor.Square_c_ui import *
+from Board_editor.Square_editor.Square_d_ui import *
 
 class Board_editor_ui:
     def __init__(self, width=800, height=600, title="Katarenga"):
@@ -51,16 +55,19 @@ class Board_editor_ui:
                         square_a_ui.run()
                         print("Lauching editor...")
 
-                    elif label == "Square A":
-                        print("Lauching editor...")
-
                     elif label == "Square B":
+                        square_b_ui = Square_b_ui()
+                        square_b_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Square C":
+                        square_b_ui = Square_c_ui()
+                        square_b_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Square D":
+                        square_b_ui = Square_d_ui()
+                        square_b_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Moves Squares":

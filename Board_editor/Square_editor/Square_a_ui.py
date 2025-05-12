@@ -44,8 +44,7 @@ class Square_a_ui:
             self.draw()
             pygame.display.flip()
             self.clock.tick(60)
-        pygame.quit()
-        sys.exit()
+        return
 
     def handle_events(self):
         for event in pygame.event.get():
