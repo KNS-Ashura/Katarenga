@@ -5,7 +5,7 @@ from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
 class Square_a_ui:
-    def __init__(self, width=800, height=600, title="Square A Editor"):
+    def __init__(self, width=640, height=640, title="Square A Editor"):
         pygame.init()
         self.__width = width
         self.__height = height

@@ -8,7 +8,7 @@ from Board_editor.Square_editor.Square_c_ui import *
 from Board_editor.Square_editor.Square_d_ui import *
 
 class Board_editor_ui:
-    def __init__(self, width=800, height=600, title="Katarenga"):
+    def __init__(self, width=640, height=640, title="Katarenga"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -19,14 +19,13 @@ class Board_editor_ui:
         self.running = True
         
         self.buttons = [
-            {"label": "Square A", "rect": pygame.Rect(225, 100, 150, 50), "color": (70, 130, 180)},
-            {"label": "Square B", "rect": pygame.Rect(425, 100, 150, 50), "color": (60, 179, 113)},
-            {"label": "Square C", "rect": pygame.Rect(225, 200, 150, 50), "color": (220, 20, 60)},
-            {"label": "Square D", "rect": pygame.Rect(425, 200, 150, 50), "color": (255, 140, 0)},
-            {"label": "Moves Squares", "rect": pygame.Rect(300, 300, 200, 50), "color": (186, 85, 211)},
-            {"label": "Go to menu", "rect": pygame.Rect(300, 400, 200, 50), "color": (234, 182, 118)}
+            {"label": "Square A", "rect": pygame.Rect(145, 100, 150, 50), "color": (70, 130, 180)},
+            {"label": "Square B", "rect": pygame.Rect(345, 100, 150, 50), "color": (60, 179, 113)},
+            {"label": "Square C", "rect": pygame.Rect(145, 200, 150, 50), "color": (220, 20, 60)},
+            {"label": "Square D", "rect": pygame.Rect(345, 200, 150, 50), "color": (255, 140, 0)},
+            {"label": "Moves Squares", "rect": pygame.Rect(220, 300, 200, 50), "color": (186, 85, 211)},
+            {"label": "Go to menu", "rect": pygame.Rect(220, 400, 200, 50), "color": (234, 182, 118)}
         ]
-        
         self.font = pygame.font.SysFont(None, 36)
 
     def run(self):

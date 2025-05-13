@@ -41,13 +41,12 @@ class Katarenga_ui:
             self.gameloop()
             self.draw()
             self.board_ui.draw_all_corners(self.__screen)
-            
+
             # Draw buttons
             self.draw_buttons()
             
             pygame.display.flip()
             self.clock.tick(60)
-        return  
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -64,12 +63,10 @@ class Katarenga_ui:
         #click on the back button
         if self.back_button_rect.collidepoint(x, y):
             self.running = False
-            return
             
         # same with the restart button
         if self.restart_button_rect.collidepoint(x, y):
             self.restart_game()
-            return
             
         offset_x = (self.__width - self.cell_size * 8) // 2
         offset_y = (self.__height - self.cell_size * 8) // 2
