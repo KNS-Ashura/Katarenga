@@ -6,6 +6,7 @@ from Board_editor.Square_editor.Square_a_ui import *
 from Board_editor.Square_editor.Square_b_ui import *
 from Board_editor.Square_editor.Square_c_ui import *
 from Board_editor.Square_editor.Square_d_ui import *
+from Board_editor.Moves_board_square import Moves_board_square
 
 class Board_editor_ui:
     def __init__(self,board, width=640, height=640, title="Katarenga"):
@@ -72,6 +73,8 @@ class Board_editor_ui:
                         print("Lauching editor...")
 
                     elif label == "Moves Squares":
+                        moves_board_square_ui = Moves_board_square(self.board_obj)
+                        moves_board_square_ui.run()
                         print("Lauching editor...")
 
                     elif label == "Go to menu":

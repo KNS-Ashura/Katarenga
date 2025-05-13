@@ -4,8 +4,8 @@ import sys
 from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
-class Square_all_ui:
-    def __init__(self, board_obj, width=800, height=850, title="Square ABCD Editor"):
+class Moves_board_square:
+    def __init__(self, board_obj, width=640, height=640, title="Square ABCD Editor"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -26,7 +26,7 @@ class Square_all_ui:
             'D': self.board_obj.get_selected_board(4)
         }
 
-        self.cell_size = 80
+        self.cell_size = 57
         self.grid_size = self.cell_size * 8  # 8x8
 
         # Title setup
@@ -42,6 +42,10 @@ class Square_all_ui:
         self.button_font = pygame.font.SysFont(None, 36)
         self.back_button_rect = pygame.Rect(20, self.__height - 60, 120, 40)
         self.save_button_rect = pygame.Rect(self.__width - 140, self.__height - 60, 120, 40)
+        
+        self.selected_board_key = None  # A, B, C ou D
+        self.registered_board = None  # Board object pour la case sélectionnée
+        self.i = 0
 
     def run(self):
         while self.running:
@@ -56,17 +60,20 @@ class Square_all_ui:
                 self.running = False
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self.handle_click(event.pos)
+            elif event.type == pygame.KEYDOWN:
+                self.handle_key(event)
 
     def handle_click(self, position):
         x, y = position
 
         # Boutons
         if self.back_button_rect.collidepoint(x, y):
+            print("Back button clicked")
             self.running = False
             return
 
         if self.save_button_rect.collidepoint(x, y):
-            print("Save pressed")
+            print("Save button clicked")
             self.board_obj.set_selected_board(1, self.boards['A'])
             self.board_obj.set_selected_board(2, self.boards['B'])
             self.board_obj.set_selected_board(3, self.boards['C'])
@@ -84,26 +91,51 @@ class Square_all_ui:
             # Déterminer quel board est cliqué
             if row < 4 and col < 4:
                 board_key = 'A'
-                board_row, board_col = row, col
+                self.registered_board = self.boards['A']
+                self.i = 1
+                
             elif row < 4 and col >= 4:
                 board_key = 'B'
-                board_row, board_col = row, col - 4
+                self.registered_board = self.boards['B']
+                self.i = 2
+                
             elif row >= 4 and col < 4:
                 board_key = 'C'
-                board_row, board_col = row - 4, col
+                self.registered_board = self.boards['C']
+                self.i = 3
+                
             else:
                 board_key = 'D'
-                board_row, board_col = row - 4, col - 4
+                self.registered_board = self.boards['D']
+                self.i = 4
 
-            value = self.boards[board_key][board_row][board_col]
-            current_color = value // 10
-            new_color = (current_color % 4) + 1
-            self.boards[board_key][board_row][board_col] = new_color * 10 + (value % 10)
+            # Mise à jour de la valeur de la case
+            self.selected_board_key = board_key
+            print(f"Selected board: {board_key}")  # Debugging message
+                
+            
 
+    def handle_key(self, event):
+        if self.selected_board_key:
+            print(f"Selected board key: {self.selected_board_key}")  # Pour vérifier la valeur
+            selected_board = self.board_obj.get_selected_board(self.selected_board_key)
+            print(f"Selected board before rotation: {selected_board}")
+            
+            # Appliquer la rotation à ce tableau
+            rotated_board = self.board_obj.rotate_right(selected_board)
+            print(f"Rotated board: {rotated_board}")
+            
+            # Mettre à jour le tableau sélectionné avec la nouvelle rotation
+            self.board_obj.set_selected_board(self.selected_board_key, rotated_board)
+
+            # Après avoir mis à jour le tableau, actualise la grille
+            self.boards[self.selected_board_key] = rotated_board
+            
     def draw(self):
         self.__screen.fill((30, 30, 30))
         self.__screen.blit(self.title_surface, self.title_rect)
 
+        # Dessiner les boards mis à jour
         for row in range(8):
             for col in range(8):
                 # Déterminer à quel board cela correspond
@@ -131,7 +163,24 @@ class Square_all_ui:
                 pygame.draw.rect(self.__screen, color, rect)
                 pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)
 
-        # Boutons
+        # Surlignage du board sélectionné
+        if self.selected_board_key:
+            highlight_color = (100, 0, 0)
+            thickness = 4
+
+            if self.selected_board_key == 'A':
+                top_left = (self.left_offset, self.top_offset)
+            elif self.selected_board_key == 'B':
+                top_left = (self.left_offset + 4 * self.cell_size, self.top_offset)
+            elif self.selected_board_key == 'C':
+                top_left = (self.left_offset, self.top_offset + 4 * self.cell_size)
+            elif self.selected_board_key == 'D':
+                top_left = (self.left_offset + 4 * self.cell_size, self.top_offset + 4 * self.cell_size)
+
+            rect = pygame.Rect(top_left[0], top_left[1], 4 * self.cell_size, 4 * self.cell_size)
+            pygame.draw.rect(self.__screen, highlight_color, rect, thickness)
+
+        # Dessiner les boutons
         pygame.draw.rect(self.__screen, (70, 70, 70), self.back_button_rect)
         pygame.draw.rect(self.__screen, (255, 255, 255), self.back_button_rect, 2)
         back_text = self.button_font.render("Back", True, (255, 255, 255))
@@ -142,7 +191,8 @@ class Square_all_ui:
         save_text = self.button_font.render("Save", True, (255, 255, 255))
         self.__screen.blit(save_text, save_text.get_rect(center=self.save_button_rect.center))
 
+
 if __name__ == "__main__":
     board_obj = Board()
-    app = Square_all_ui(board_obj)
+    app = Moves_board_square(board_obj)
     app.run()
