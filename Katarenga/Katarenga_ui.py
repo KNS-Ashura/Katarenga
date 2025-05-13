@@ -78,13 +78,13 @@ class Katarenga_ui:
             value = self.board[row][col]
             color_code = value // 10
             player_code = value % 10
-
-            self.copied_value = value
-            print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
+            
+            if self.katarenga.player.get_active_player() == player_code:
+                self.copied_value = value
+                print(f"Valeur copiée de la case ({row}, {col}) : {self.copied_value}")
 
             player_code = (player_code + 1) % 3
             self.board[row][col] = color_code * 10 + player_code
-            self.update()
             
     def restart_game(self):# A completer !!!!!!!!!!!!!!!!!!!!!!!!!!!
         print("Game restarted!")

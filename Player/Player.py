@@ -63,6 +63,9 @@ class Player:
             
     def get_board_corners(self):
         return self.__board_corner
+    
+    def get_active_player(self):
+        return self.__active_player
         
     
 
