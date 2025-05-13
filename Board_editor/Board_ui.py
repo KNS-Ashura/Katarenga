@@ -109,13 +109,13 @@ class Board_ui:
 
     def get_color_from_board(self, code):
         if code == 1:
-            return (0, 0, 255)  
+            return (100, 160, 230)  
         elif code == 2:
-            return (0, 255, 0)  
+            return (125, 190, 155)  
         elif code == 3:
-            return (255, 255, 0)
+            return (240, 200, 80)
         elif code == 4:
-            return (255, 0, 0)  
+            return (235, 115, 115)  
         elif code == 5:
             return (128, 0, 128)
         else:
@@ -123,10 +123,10 @@ class Board_ui:
         
     def get_colors(self):
         return {
-            1: (0, 0, 255),  
-            2: (0, 255, 0),  
-            3: (255, 255, 0),
-            4: (255, 0, 0),  
+            1: (100, 160, 230),  
+            2: (125, 190, 155),  
+            3: (240, 200, 80),
+            4: (235, 115, 115),  
             5: (128, 0, 128)
         }
         
