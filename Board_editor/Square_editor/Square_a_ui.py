@@ -5,7 +5,7 @@ from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
 class Square_a_ui:
-    def __init__(self, width=640, height=640, title="Square A Editor"):
+    def __init__(self,board, width=640, height=640, title="Square A Editor"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -15,7 +15,7 @@ class Square_a_ui:
         self.clock = pygame.time.Clock()
         self.running = True
 
-        self.board_obj = Board()
+        self.board_obj = board
         self.board_ui = Board_ui()
 
         self.board = self.board_obj.get_selected_board(1)
@@ -44,7 +44,6 @@ class Square_a_ui:
             self.draw()
             pygame.display.flip()
             self.clock.tick(60)
-        return
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -64,7 +63,8 @@ class Square_a_ui:
         # Check if click is on the "Save" button
         if self.save_button_rect.collidepoint(x, y):
             print("Save pressed")
-            return
+            self.board_obj.set_selected_board(1,self.board)
+            print(self.board_obj.get_selected_board(1))
 
         # Check if click is within the board area
         if y < self.top_offset or x < self.left_offset:

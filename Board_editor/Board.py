@@ -72,3 +72,15 @@ class Board:
         else:
             raise ValueError("Invalid board selection")
         return self.__selected_board
+    
+    def set_selected_board(self,selected_board, new_board):
+        if selected_board == 1:
+            self.__board_a = new_board
+        elif selected_board == 2:
+            self.__board_b = new_board
+        elif selected_board == 3:
+            self.__board_c = new_board
+        elif selected_board == 4:
+            self.__board_d = new_board
+        else:
+            raise ValueError("Invalid board selection")

@@ -8,7 +8,7 @@ from Board_editor.Square_editor.Square_c_ui import *
 from Board_editor.Square_editor.Square_d_ui import *
 
 class Board_editor_ui:
-    def __init__(self, width=640, height=640, title="Katarenga"):
+    def __init__(self,board, width=640, height=640, title="Katarenga"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -17,6 +17,8 @@ class Board_editor_ui:
         pygame.display.set_caption(self.__title)
         self.clock = pygame.time.Clock()
         self.running = True
+        
+        self.board_obj = board
         
         self.buttons = [
             {"label": "Square A", "rect": pygame.Rect(145, 100, 150, 50), "color": (70, 130, 180)},
@@ -50,7 +52,7 @@ class Board_editor_ui:
                     label = button["label"]
                     board_obj = Board()
                     if label == "Square A":
-                        square_a_ui = Square_a_ui()
+                        square_a_ui = Square_a_ui(self.board_obj)
                         square_a_ui.run()
                         print("Lauching editor...")
 

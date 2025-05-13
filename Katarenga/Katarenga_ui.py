@@ -88,6 +88,8 @@ class Katarenga_ui:
             
     def restart_game(self):# A completer !!!!!!!!!!!!!!!!!!!!!!!!!!!
         print("Game restarted!")
+        self.board = self.board_obj.get_fused_board()
+        self.katarenga.place_pawn(self.board)
         
     def gameloop(self):
         pass

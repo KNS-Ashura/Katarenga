@@ -12,11 +12,14 @@ from Isolation.Isolation_ui import Isolation_ui
 
 
 class Main_menu:
-    def __init__(self, width=640, height=600, title="Katarenga"):
+    def __init__(self, width=640, height=640, title="Katarenga"):
         pygame.init()
         self.__width = width
         self.__height = height
         self.__title = title
+        
+        self.board_obj = Board()
+        
         self.__screen = pygame.display.set_mode((self.__width, self.__height))
         pygame.display.set_caption(self.__title)
         self.clock = pygame.time.Clock()
@@ -57,13 +60,12 @@ class Main_menu:
             for button in self.buttons:
                 if button["rect"].collidepoint(position):
                     label = button["label"]
-                    board_obj = Board()
                     if label == "Katarenga":
                         print("Lauching Katarenga...")
                         player = Player(8,8)  
                         board_ui_obj = Board_ui()
                         katarenga = Katarenga(player)            # crée l'objet Board
-                        game = Katarenga_ui(board_obj,board_ui_obj,katarenga)       # crée le jeu Katarenga
+                        game = Katarenga_ui(self.board_obj,board_ui_obj,katarenga)       # crée le jeu Katarenga
                         game.run()                        # lance le jeu
                     elif label == "Congress":
                         print("Lauching Congress...")
@@ -75,7 +77,7 @@ class Main_menu:
                         game.run()
                     elif label == "Board Editor":
                         print("Lauching the Board Editor...")
-                        game = Board_editor_ui()
+                        game = Board_editor_ui(self.board_obj)
                         game.run()
                     elif label == "Leave Game":
                         print("Leaving the Game...")
