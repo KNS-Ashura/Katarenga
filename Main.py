@@ -12,33 +12,32 @@ from Isolation.Isolation_ui import Isolation_ui
 
 
 class Main_menu:
-    def __init__(self, width=640, height=640, title="Katarenga"):
+    def __init__(self, width=800, height=600, title="Katarenga"):
         pygame.init()
         self.__width = width
         self.__height = height
         self.__title = title
-        
-        self.board_obj = Board()
-        
         self.__screen = pygame.display.set_mode((self.__width, self.__height))
         pygame.display.set_caption(self.__title)
         self.clock = pygame.time.Clock()
         self.running = True
+
+
         
         #ajout des boutons pour acceder au differents modes de jeux
         
         self.buttons = [
-            {"label": "Katarenga", "rect": pygame.Rect(220, 75, 200, 50), "color": (70, 130, 180)},
-            {"label": "Congress", "rect": pygame.Rect(220, 175, 200, 50), "color": (60, 179, 113)},
-            {"label": "Isolation", "rect": pygame.Rect(220, 275, 200, 50), "color": (220, 20, 60)},
-            {"label": "Board Editor", "rect": pygame.Rect(220, 385, 200, 50), "color": (255, 140, 0)},
-            {"label": "Leave Game", "rect": pygame.Rect(220, 485, 200, 50), "color": (186, 85, 211)}
+            {"label": "Katarenga", "rect": pygame.Rect(300, 50, 200, 50), "color": (70, 130, 180)},
+            {"label": "Congress", "rect": pygame.Rect(300, 150, 200, 50), "color": (60, 179, 113)},
+            {"label": "Isolation", "rect": pygame.Rect(300, 250, 200, 50), "color": (220, 20, 60)},
+            {"label": "Board Editor", "rect": pygame.Rect(300, 350, 200, 50), "color": (255, 140, 0)},
+            {"label": "Leave Game", "rect": pygame.Rect(300, 450, 200, 50), "color": (186, 85, 211)}
         ]
 
         self.font = pygame.font.SysFont(None, 36)
 
     def run(self):
-        #main loop of the interface
+       
         while self.running:
             self.handle_events()
             self.update()
@@ -49,23 +48,25 @@ class Main_menu:
         sys.exit()
 
     def handle_events(self):
+        #fonction for the gestions of the inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self.handle_click(event.pos)
-                            
+                
     def handle_click(self, position):
             #gestion of the redirection for the different buttons
             for button in self.buttons:
                 if button["rect"].collidepoint(position):
                     label = button["label"]
+                    board_obj = Board()
                     if label == "Katarenga":
                         print("Lauching Katarenga...")
                         player = Player(8,8)  
                         board_ui_obj = Board_ui()
                         katarenga = Katarenga(player)            # crée l'objet Board
-                        game = Katarenga_ui(self.board_obj,board_ui_obj,katarenga)       # crée le jeu Katarenga
+                        game = Katarenga_ui(board_obj,board_ui_obj,katarenga)       # crée le jeu Katarenga
                         game.run()                        # lance le jeu
                     elif label == "Congress":
                         print("Lauching Congress...")
@@ -77,7 +78,7 @@ class Main_menu:
                         game.run()
                     elif label == "Board Editor":
                         print("Lauching the Board Editor...")
-                        game = Board_editor_ui(self.board_obj)
+                        game = Board_editor_ui()
                         game.run()
                     elif label == "Leave Game":
                         print("Leaving the Game...")
