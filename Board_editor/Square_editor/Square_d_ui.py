@@ -5,7 +5,7 @@ from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
 class Square_d_ui:  # <--- nom corrigé ici
-    def __init__(self, width=640, height=640, title="Square D Editor"):
+    def __init__(self, board, width=640, height=640, title="Square D Editor"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -15,10 +15,10 @@ class Square_d_ui:  # <--- nom corrigé ici
         self.clock = pygame.time.Clock()
         self.running = True
 
-        self.board_obj = Board()
+        self.board_obj = board
         self.board_ui = Board_ui()
 
-        self.board = self.board_obj.get_selected_board(1)
+        self.board = self.board_obj.get_selected_board(4)
 
         self.cell_size = 100
         self.grid_size = self.cell_size * 4  # 4x4 cells = 400 pixels
@@ -60,6 +60,7 @@ class Square_d_ui:  # <--- nom corrigé ici
             return
 
         if self.save_button_rect.collidepoint(x, y):
+            self.board_obj.set_selected_board(4, self.board)  
             print("Save pressed")
             return
 
@@ -109,5 +110,6 @@ class Square_d_ui:  # <--- nom corrigé ici
         self.__screen.blit(save_text, save_text.get_rect(center=self.save_button_rect.center))
 
 if __name__ == "__main__":
-    app = Square_d_ui()  # <--- nom corrigé ici aussi
+    board = Board()  
+    app = Square_d_ui(board)  
     app.run()

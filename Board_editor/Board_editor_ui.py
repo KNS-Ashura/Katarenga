@@ -52,24 +52,28 @@ class Board_editor_ui:
                     label = button["label"]
                     board_obj = Board()
                     if label == "Square A":
+                        print("Lauching Square A...")
                         square_a_ui = Square_a_ui(self.board_obj)
                         square_a_ui.run()
-                        print("Lauching editor...")
+                        
 
                     elif label == "Square B":
-                        square_b_ui = Square_b_ui()
+                        square_b_ui = Square_b_ui(self.board_obj)
                         square_b_ui.run()
-                        print("Lauching editor...")
+                        print("Lauching Square B...")
+
 
                     elif label == "Square C":
-                        square_c_ui = Square_c_ui()
+                        print("Lauching Square C...")
+                        square_c_ui = Square_c_ui(self.board_obj)
                         square_c_ui.run()
-                        print("Lauching editor...")
+                        
 
                     elif label == "Square D":
-                        square_d_ui = Square_d_ui()
+                        print("Lauching Square D...")
+                        square_d_ui = Square_d_ui(self.board_obj)
                         square_d_ui.run()
-                        print("Lauching editor...")
+                        
 
                     elif label == "Moves Squares":
                         print("Lauching editor...")

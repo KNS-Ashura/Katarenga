@@ -4,8 +4,8 @@ import sys
 from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
-class Square_b_ui:  # <--- nom corrigé ici
-    def __init__(self, width=640, height=640, title="Square B Editor"):
+class Square_b_ui:
+    def __init__(self, board, width=640, height=640, title="Square B Editor"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -15,10 +15,10 @@ class Square_b_ui:  # <--- nom corrigé ici
         self.clock = pygame.time.Clock()
         self.running = True
 
-        self.board_obj = Board()
+        self.board_obj = board
         self.board_ui = Board_ui()
 
-        self.board = self.board_obj.get_selected_board(1)
+        self.board = self.board_obj.get_selected_board(2)  
 
         self.cell_size = 100
         self.grid_size = self.cell_size * 4  # 4x4 cells = 400 pixels
@@ -44,6 +44,7 @@ class Square_b_ui:  # <--- nom corrigé ici
             pygame.display.flip()
             self.clock.tick(60)
         return
+
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -60,6 +61,7 @@ class Square_b_ui:  # <--- nom corrigé ici
 
         if self.save_button_rect.collidepoint(x, y):
             print("Save pressed")
+            self.board_obj.set_selected_board(2, self.board)  
             return
 
         if y < self.top_offset or x < self.left_offset:
@@ -108,5 +110,6 @@ class Square_b_ui:  # <--- nom corrigé ici
         self.__screen.blit(save_text, save_text.get_rect(center=self.save_button_rect.center))
 
 if __name__ == "__main__":
-    app = Square_b_ui()  # <--- nom corrigé ici aussi
+    board = Board()
+    app = Square_b_ui(board)
     app.run()

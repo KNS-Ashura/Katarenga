@@ -64,7 +64,7 @@ class Square_a_ui:
         if self.save_button_rect.collidepoint(x, y):
             print("Save pressed")
             self.board_obj.set_selected_board(1,self.board)
-            print(self.board_obj.get_selected_board(1))
+            print(self.board_obj.get_selected_board(2))
 
         # Check if click is within the board area
         if y < self.top_offset or x < self.left_offset:
