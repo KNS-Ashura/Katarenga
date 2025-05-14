@@ -138,16 +138,16 @@ class Moves_board_square:
             for col in range(8):
                 # Déterminer à quel board cela correspond
                 if row < 4 and col < 4:
-                    board = self.boards['1']
+                    board = self.boards[1]
                     board_row, board_col = row, col
                 elif row < 4 and col >= 4:
-                    board = self.boards['2']
+                    board = self.boards[2]
                     board_row, board_col = row, col - 4
                 elif row >= 4 and col < 4:
-                    board = self.boards['3']
+                    board = self.boards[3]
                     board_row, board_col = row - 4, col
                 else:
-                    board = self.boards['4']
+                    board = self.boards[4]
                     board_row, board_col = row - 4, col - 4
 
                 rect = pygame.Rect(
