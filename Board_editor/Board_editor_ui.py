@@ -2,10 +2,7 @@ import pygame
 from Board_editor.Board import Board
 
 #Import all square interfaces
-from Board_editor.Square_editor.Square_a_ui import *
-from Board_editor.Square_editor.Square_b_ui import *
-from Board_editor.Square_editor.Square_c_ui import *
-from Board_editor.Square_editor.Square_d_ui import *
+from Board_editor.Square_editor.Square_editor_ui import *
 from Board_editor.Moves_board_square import Moves_board_square
 
 class Board_editor_ui:
@@ -22,13 +19,11 @@ class Board_editor_ui:
         self.board_obj = board
         
         self.buttons = [
-            {"label": "Square A", "rect": pygame.Rect(145, 100, 150, 50), "color": (70, 130, 180)},
-            {"label": "Square B", "rect": pygame.Rect(345, 100, 150, 50), "color": (60, 179, 113)},
-            {"label": "Square C", "rect": pygame.Rect(145, 200, 150, 50), "color": (220, 20, 60)},
-            {"label": "Square D", "rect": pygame.Rect(345, 200, 150, 50), "color": (255, 140, 0)},
-            {"label": "Moves Squares", "rect": pygame.Rect(220, 300, 200, 50), "color": (186, 85, 211)},
-            {"label": "Go to menu", "rect": pygame.Rect(220, 400, 200, 50), "color": (234, 182, 118)}
+            {"label": "Edit Square", "rect": pygame.Rect(220, 150, 200, 50), "color": (70, 130, 180)},
+            {"label": "Create Board", "rect": pygame.Rect(220, 250, 200, 50), "color": (186, 85, 211)},
+            {"label": "Go to menu", "rect": pygame.Rect(220, 350, 200, 50), "color": (234, 182, 118)}
         ]
+        
         self.font = pygame.font.SysFont(None, 36)
 
     def run(self):
@@ -52,31 +47,12 @@ class Board_editor_ui:
                 if button["rect"].collidepoint(position):
                     label = button["label"]
                     board_obj = Board()
-                    if label == "Square A":
-                        print("Lauching Square A...")
-                        square_a_ui = Square_a_ui(self.board_obj)
-                        square_a_ui.run()
-                        
+                    if label == "Edit Square":
+                        print("Lauching Editor...")
+                        square_a_ui = Square_editor_ui(self.board_obj)
+                        square_a_ui.run()                    
 
-                    elif label == "Square B":
-                        square_b_ui = Square_b_ui(self.board_obj)
-                        square_b_ui.run()
-                        print("Lauching Square B...")
-
-
-                    elif label == "Square C":
-                        print("Lauching Square C...")
-                        square_c_ui = Square_c_ui(self.board_obj)
-                        square_c_ui.run()
-                        
-
-                    elif label == "Square D":
-                        print("Lauching Square D...")
-                        square_d_ui = Square_d_ui(self.board_obj)
-                        square_d_ui.run()
-                        
-
-                    elif label == "Moves Squares":
+                    elif label == "Create Board":
                         moves_board_square_ui = Moves_board_square(self.board_obj)
                         moves_board_square_ui.run()
                         print("Lauching editor...")

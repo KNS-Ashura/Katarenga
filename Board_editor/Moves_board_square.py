@@ -20,10 +20,10 @@ class Moves_board_square:
 
         # Get the 4 boards
         self.boards = {
-            1: self.board_obj.get_selected_board(1),
-            2: self.board_obj.get_selected_board(2),
-            3: self.board_obj.get_selected_board(3),
-            4: self.board_obj.get_selected_board(4)
+            1: self.board_obj.get_selected_square(1),
+            2: self.board_obj.get_selected_square(2),
+            3: self.board_obj.get_selected_square(3),
+            4: self.board_obj.get_selected_square(4)
         }
 
         self.cell_size = 57
@@ -116,7 +116,7 @@ class Moves_board_square:
     def handle_key(self, event):
         if self.selected_board_key:
             print(f"Selected board key: {self.selected_board_key}")  # Pour vérifier la valeur
-            selected_board = self.board_obj.get_selected_board(self.selected_board_key)
+            selected_board = self.board_obj.get_selected_square(self.selected_board_key)
             print(f"Selected board before rotation: {selected_board}")
             
             # Appliquer la rotation à ce tableau
@@ -124,7 +124,7 @@ class Moves_board_square:
             print(f"Rotated board: {rotated_board}")
             
             # Mettre à jour le tableau sélectionné avec la nouvelle rotation
-            self.board_obj.set_selected_board(self.selected_board_key, rotated_board)
+            self.board_obj.set_selected_square(self.selected_board_key, rotated_board)
 
             # Après avoir mis à jour le tableau, actualise la grille
             self.boards[self.selected_board_key] = rotated_board

@@ -4,8 +4,8 @@ import sys
 from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
-class Square_c_ui:  # <--- nom corrigé ici
-    def __init__(self, board,  width=640, height=640, title="Square C Editor"):
+class Square_editor_ui:
+    def __init__(self,board, width=640, height=640, title="Square A Editor"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -18,22 +18,23 @@ class Square_c_ui:  # <--- nom corrigé ici
         self.board_obj = board
         self.board_ui = Board_ui()
 
-        self.board = self.board_obj.get_selected_board(3)
+        self.square = self.board_obj.get_default_square()
 
         self.cell_size = 100
         self.grid_size = self.cell_size * 4  # 4x4 cells = 400 pixels
 
         # Title gestion
         self.title_font = pygame.font.SysFont(None, 48)
-        self.title_surface = self.title_font.render("Square C", True, (255, 255, 255))
+        self.title_surface = self.title_font.render("Square Editor", True, (255, 255, 255))
         self.title_rect = self.title_surface.get_rect(center=(self.__width // 2, 30))
 
         # Offsets for center board
-        self.top_offset = self.title_rect.bottom + 20
+        self.top_offset = self.title_rect.bottom + 20  # space under the title
         self.left_offset = (self.__width - self.grid_size) // 2  
 
         # Buttons setup
         self.button_font = pygame.font.SysFont(None, 36)
+
         self.back_button_rect = pygame.Rect(20, self.__height - 60, 120, 40)
         self.save_button_rect = pygame.Rect(self.__width - 140, self.__height - 60, 120, 40)
 
@@ -43,7 +44,6 @@ class Square_c_ui:  # <--- nom corrigé ici
             self.draw()
             pygame.display.flip()
             self.clock.tick(60)
-        return
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -55,15 +55,29 @@ class Square_c_ui:  # <--- nom corrigé ici
     def handle_click(self, position):
         x, y = position
 
+        # Check if click is on the "Back" button
         if self.back_button_rect.collidepoint(x, y):
             self.running = False
             return
 
+        # Check if click is on the "Save" button
         if self.save_button_rect.collidepoint(x, y):
-            self.board_obj.set_selected_board(3, self.board)  
-            print("Save pressed")
-            return
+            # Vérifier qu'aucune case du tableau n'est égale à 0
+            if all(cell != 0 for row in self.square for cell in row):
+                print("Save pressed")
+                self.board_obj.add_square(self.square)
+                filename = "game_data.json"
 
+                # Vérifie le fichier et le crée s'il n'existe pas
+                self.board_obj.check_or_create_file(filename)
+
+                # Sauvegarde dans le fichier
+                self.board_obj.save_to_file(filename)
+            else:
+                print("Erreur : Toutes les cases doivent être non nulles (différentes de 0)")
+
+
+        # Check if click is within the board area
         if y < self.top_offset or x < self.left_offset:
             return
 
@@ -71,21 +85,25 @@ class Square_c_ui:  # <--- nom corrigé ici
         row = (y - self.top_offset) // self.cell_size
 
         if 0 <= row < 4 and 0 <= col < 4:
-            value = self.board[row][col]
+            value = self.square[row][col]
             color_code = value // 10
 
             print(f"Clicked cell ({row}, {col}): Value {value}, Color {color_code}")
 
-            current_color_code = self.board[row][col] // 10
+            # Colors cycles
+            current_color_code = self.square[row][col] // 10
             new_color_code = (current_color_code % 4) + 1
-            self.board[row][col] = new_color_code * 10 + (self.board[row][col] % 10)
+            self.square[row][col] = new_color_code * 10 + (self.square[row][col] % 10)
 
-            print(f"Updated board: {self.board}")
+            print(f"Updated board: {self.square}")
 
     def draw(self):
         self.__screen.fill((30, 30, 30))
+
+        # Print TITLE
         self.__screen.blit(self.title_surface, self.title_rect)
 
+        # Draw Board
         for row in range(4):
             for col in range(4):
                 rect = pygame.Rect(
@@ -95,21 +113,22 @@ class Square_c_ui:  # <--- nom corrigé ici
                     self.cell_size
                 )
 
-                color = self.board_ui.get_color_from_board(self.board[row][col] // 10)
+                color = self.board_ui.get_color_from_board(self.square[row][col] // 10)
                 pygame.draw.rect(self.__screen, color, rect)
                 pygame.draw.rect(self.__screen, (255, 255, 255), rect, 1)
 
+        # Draw "Back" button
         pygame.draw.rect(self.__screen, (70, 70, 70), self.back_button_rect)
         pygame.draw.rect(self.__screen, (255, 255, 255), self.back_button_rect, 2)
         back_text = self.button_font.render("Back", True, (255, 255, 255))
         self.__screen.blit(back_text, back_text.get_rect(center=self.back_button_rect.center))
 
+        # Draw "Save" button
         pygame.draw.rect(self.__screen, (70, 70, 70), self.save_button_rect)
         pygame.draw.rect(self.__screen, (255, 255, 255), self.save_button_rect, 2)
         save_text = self.button_font.render("Save", True, (255, 255, 255))
         self.__screen.blit(save_text, save_text.get_rect(center=self.save_button_rect.center))
 
 if __name__ == "__main__":
-    board = Board()  
-    app = Square_c_ui(board)  
+    app = Square_editor_ui()
     app.run()
