@@ -5,7 +5,7 @@ from Board_editor.Board import Board
 from Board_editor.Board_ui import Board_ui
 
 class Moves_board_square:
-    def __init__(self, board_obj, width=640, height=640, title="Square ABCD Editor"):
+    def __init__(self, board_obj, width=640, height=640, title="Square 1234 Editor"):
         pygame.init()
         self.__width = width
         self.__height = height
@@ -20,10 +20,10 @@ class Moves_board_square:
 
         # Get the 4 boards
         self.boards = {
-            'A': self.board_obj.get_selected_board(1),
-            'B': self.board_obj.get_selected_board(2),
-            'C': self.board_obj.get_selected_board(3),
-            'D': self.board_obj.get_selected_board(4)
+            1: self.board_obj.get_selected_board(1),
+            2: self.board_obj.get_selected_board(2),
+            3: self.board_obj.get_selected_board(3),
+            4: self.board_obj.get_selected_board(4)
         }
 
         self.cell_size = 57
@@ -31,7 +31,7 @@ class Moves_board_square:
 
         # Title setup
         self.title_font = pygame.font.SysFont(None, 48)
-        self.title_surface = self.title_font.render("All Squares A-B-C-D", True, (255, 255, 255))
+        self.title_surface = self.title_font.render("All Squares 1-2-3-4", True, (255, 255, 255))
         self.title_rect = self.title_surface.get_rect(center=(self.__width // 2, 30))
 
         # Offset to center the grid
@@ -43,7 +43,7 @@ class Moves_board_square:
         self.back_button_rect = pygame.Rect(20, self.__height - 60, 120, 40)
         self.save_button_rect = pygame.Rect(self.__width - 140, self.__height - 60, 120, 40)
         
-        self.selected_board_key = None  # A, B, C ou D
+        self.selected_board_key = None  # 1, 2, 3 ou 4
         self.registered_board = None  # Board object pour la case sélectionnée
         self.i = 0
 
@@ -74,10 +74,10 @@ class Moves_board_square:
 
         if self.save_button_rect.collidepoint(x, y):
             print("Save button clicked")
-            self.board_obj.set_selected_board(1, self.boards['A'])
-            self.board_obj.set_selected_board(2, self.boards['B'])
-            self.board_obj.set_selected_board(3, self.boards['C'])
-            self.board_obj.set_selected_board(4, self.boards['D'])
+            self.board_obj.set_selected_board(1, self.boards[1])
+            self.board_obj.set_selected_board(2, self.boards[2])
+            self.board_obj.set_selected_board(3, self.boards[3])
+            self.board_obj.set_selected_board(4, self.boards[4])
             return
 
         # Click dans la grille
@@ -90,30 +90,28 @@ class Moves_board_square:
         if 0 <= row < 8 and 0 <= col < 8:
             # Déterminer quel board est cliqué
             if row < 4 and col < 4:
-                board_key = 'A'
-                self.registered_board = self.boards['A']
+                board_key = 1
+                self.registered_board = self.boards[1]
                 self.i = 1
                 
             elif row < 4 and col >= 4:
-                board_key = 'B'
-                self.registered_board = self.boards['B']
+                board_key = 2
+                self.registered_board = self.boards[2]
                 self.i = 2
                 
             elif row >= 4 and col < 4:
-                board_key = 'C'
-                self.registered_board = self.boards['C']
+                board_key = 3
+                self.registered_board = self.boards[3]
                 self.i = 3
                 
             else:
-                board_key = 'D'
-                self.registered_board = self.boards['D']
+                board_key = 4
+                self.registered_board = self.boards[4]
                 self.i = 4
 
             # Mise à jour de la valeur de la case
             self.selected_board_key = board_key
             print(f"Selected board: {board_key}")  # Debugging message
-                
-            
 
     def handle_key(self, event):
         if self.selected_board_key:
@@ -130,7 +128,7 @@ class Moves_board_square:
 
             # Après avoir mis à jour le tableau, actualise la grille
             self.boards[self.selected_board_key] = rotated_board
-            
+
     def draw(self):
         self.__screen.fill((30, 30, 30))
         self.__screen.blit(self.title_surface, self.title_rect)
@@ -140,16 +138,16 @@ class Moves_board_square:
             for col in range(8):
                 # Déterminer à quel board cela correspond
                 if row < 4 and col < 4:
-                    board = self.boards['A']
+                    board = self.boards['1']
                     board_row, board_col = row, col
                 elif row < 4 and col >= 4:
-                    board = self.boards['B']
+                    board = self.boards['2']
                     board_row, board_col = row, col - 4
                 elif row >= 4 and col < 4:
-                    board = self.boards['C']
+                    board = self.boards['3']
                     board_row, board_col = row - 4, col
                 else:
-                    board = self.boards['D']
+                    board = self.boards['4']
                     board_row, board_col = row - 4, col - 4
 
                 rect = pygame.Rect(
@@ -168,13 +166,13 @@ class Moves_board_square:
             highlight_color = (100, 0, 0)
             thickness = 4
 
-            if self.selected_board_key == 'A':
+            if self.selected_board_key == 1:
                 top_left = (self.left_offset, self.top_offset)
-            elif self.selected_board_key == 'B':
+            elif self.selected_board_key == 2:
                 top_left = (self.left_offset + 4 * self.cell_size, self.top_offset)
-            elif self.selected_board_key == 'C':
+            elif self.selected_board_key == 3:
                 top_left = (self.left_offset, self.top_offset + 4 * self.cell_size)
-            elif self.selected_board_key == 'D':
+            elif self.selected_board_key == 4:
                 top_left = (self.left_offset + 4 * self.cell_size, self.top_offset + 4 * self.cell_size)
 
             rect = pygame.Rect(top_left[0], top_left[1], 4 * self.cell_size, 4 * self.cell_size)
